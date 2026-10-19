@@ -1,0 +1,170 @@
+@font-face {
+  font-family: "Alan Sans";
+  src: url("fonts/AlanSans-Light.eot");
+  src:
+    local("Alan Sans Light"),
+    local("AlanSans-Light"),
+    url("fonts/AlanSans-Light.woff2") format("woff2"),
+    url("fonts/AlanSans-Light.woff") format("woff"),
+    url("fonts/AlanSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0f0f1a;
+  --surface: #1a1a2e;
+  --surface-hover: #24243e;
+  --line: #2d2d4a;
+  --text: #e8e8f0;
+  --text-dim: #8b8ba7;
+  --x-color: #ff6b6b;
+  --o-color: #4ecdc4;
+  --accent: #ffaa00;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Alan Sans", "Segoe UI", sans-serif;
+  background: linear-gradient(145deg, #0f0f1a 0%, #1a1a2e 100%);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+/* ---------- LAYOUT ---------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  width: min(420px, 100%);
+  padding: 2rem;
+  background: var(--bg);
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--text);
+}
+
+.status {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: var(--text-dim);
+  min-height: 1.4em;
+}
+
+/* ---------- GRID ---------- */
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(3px, 1vw, 6px);
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border-radius: clamp(8px, 2vw, 14px);
+  font-size: clamp(2rem, 9vw, 3.5rem);
+  font-weight: 700;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease,
+    color 0.15s ease;
+}
+
+.grid-item:empty:hover {
+  background: var(--surface-hover);
+}
+
+.grid-item:empty:active {
+  transform: scale(0.96);
+}
+
+.grid-item[data-mark="X"] {
+  color: var(--x-color);
+}
+
+.grid-item[data-mark="O"] {
+  color: var(--o-color);
+}
+
+.grid-item.win {
+  background: var(--accent);
+  color: var(--bg);
+  animation: pulse 0.7s ease-in-out infinite alternate;
+}
+
+/* ---------- BUTTON ---------- */
+.reset-btn {
+  font-family: inherit;
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 0.6rem;
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.1s ease;
+}
+
+.reset-btn:hover {
+  background: var(--surface-hover);
+}
+
+.reset-btn:active {
+  transform: scale(0.97);
+}
+
+.reset-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---------- SMALL SCREENS ---------- */
+@media (max-width: 480px) {
+  body {
+    padding: 0.75rem;
+  }
+
+  .container {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+}
